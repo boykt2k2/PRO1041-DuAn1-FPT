@@ -26,10 +26,11 @@ import javax.swing.table.DefaultTableModel;
  * @author 0978078602
  */
 public class FormBanHang extends javax.swing.JPanel {
-private BanHangService banHangService = new BanHangServiceImpl();
-private DefaultTableModel defaultTableModel;
-private HoaDonService hoaDonService = new HoaDonServiceImpl();
-private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml();
+
+    private BanHangService banHangService = new BanHangServiceImpl();
+    private DefaultTableModel defaultTableModel;
+    private HoaDonService hoaDonService = new HoaDonServiceImpl();
+    private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml();
 
     /**
      * Creates new form FormBanHang
@@ -39,21 +40,21 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
         loadData(banHangService.getList());
         loadDataHoaDon(banHangService.getListHoaDon());
     }
-    public void loadData(ArrayList<DoUongVM> listDoUong){
+
+    public void loadData(ArrayList<DoUongVM> listDoUong) {
         defaultTableModel = (DefaultTableModel) tbl_bangSanPham1.getModel();
         defaultTableModel.setRowCount(0);
         for (DoUongVM doUong : listDoUong) {
-            defaultTableModel.addRow(new  Object[]{
+            defaultTableModel.addRow(new Object[]{
                 doUong.getTenDoUong(),
                 doUong.getDonGia(),
                 doUong.getTrangThai() == 1 ? "Còn" : "Hết",
                 doUong.getSize().getTenSize(),
-                doUong.getDanhMuc().getTenDanhMuc(),
-                
-            });
+                doUong.getDanhMuc().getTenDanhMuc(),});
         }
     }
-    public void loadDataHoaDon(ArrayList<HoaDon> listHoaDon){
+
+    public void loadDataHoaDon(ArrayList<HoaDon> listHoaDon) {
         defaultTableModel = (DefaultTableModel) tblHoaDon.getModel();
         defaultTableModel.setRowCount(0);
         for (HoaDon hoaDon : listHoaDon) {
@@ -63,14 +64,14 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
                 hoaDon.getNgayThanhToan(),
                 hoaDon.getTinhTrang() == 1 ? "Chờ thanh toán" : "Đã thanh toán",
                 hoaDon.getNhanVien().getMaNhanVien(),
-                hoaDon.getKhuyenMai().getPhamTramKhuyenMai(),
-//                hoaDon.getBan().getMaBan(),
-//                hoaDon.getKhuyenMai().getPhamTramKhuyenMai() + "%",
+                hoaDon.getKhuyenMai().getPhamTramKhuyenMai(), //                hoaDon.getBan().getMaBan(),
+            //                hoaDon.getKhuyenMai().getPhamTramKhuyenMai() + "%",
             });
         }
-        
+
     }
-    public void loadDataHoaDonChiTiet(ArrayList<DoUong_HoaDon> listHoaDonChiTiet){
+
+    public void loadDataHoaDonChiTiet(ArrayList<DoUong_HoaDon> listHoaDonChiTiet) {
         defaultTableModel = (DefaultTableModel) tbl_gioHang1.getModel();
         defaultTableModel.setRowCount(0);
         for (DoUong_HoaDon doUong_HoaDon : listHoaDonChiTiet) {
@@ -78,47 +79,49 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
                 doUong_HoaDon.getDoUong().getTenDoUong(),
                 doUong_HoaDon.getSoLuong(),
                 doUong_HoaDon.getDonGia(),
-                doUong_HoaDon.thanhTien(),
-            });
+                doUong_HoaDon.thanhTien(),});
         }
     }
+
     private void getSum() {
-        
+
         float sum = 0;
-        for(int i =0;i<tbl_gioHang1.getRowCount();i++){
+        for (int i = 0; i < tbl_gioHang1.getRowCount(); i++) {
             float abs = (float) (tbl_gioHang1.getValueAt(i, 3));
             sum = sum + abs;
         }
         //JlableTotal is where I want to display the total
         txtTongTien.setText(Float.toString(sum));
-   }
+    }
+
     private void getTienTraKhach() {
         String tienKhachDua = txtTienKhachDua.getText();
         float sum = 0;
-        for(int i =0;i<tbl_gioHang1.getRowCount();i++){
+        for (int i = 0; i < tbl_gioHang1.getRowCount(); i++) {
             float abs = (float) (tbl_gioHang1.getValueAt(i, 3));
             sum = sum + abs;
         }
-        float tienThua =   Float.parseFloat(tienKhachDua) - sum;
+        float tienThua = Float.parseFloat(tienKhachDua) - sum;
         txtTienThua.setText(Float.toString(tienThua));
-   }
-    private Date genNgay(){
+    }
+
+    private Date genNgay() {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         return date;
     }
-    
-    
-    private String genMa(ArrayList<HoaDon> listHoaDon){
+
+    private String genMa(ArrayList<HoaDon> listHoaDon) {
         int count = 1;
         for (HoaDon hoaDon : listHoaDon) {
             count++;
         }
-        int ma =   count + 1;
-        
-        return "HD" + ma ;
+        int ma = count + 1;
+
+        return "HD" + ma;
     }
-    public void clearForm(){
+
+    public void clearForm() {
         txtMaHoaDon.setText("");
         txtNgayTao.setText("");
         txtMaNV.setText("");
@@ -126,9 +129,9 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
         txtGiamGia.setText("");
         txtTienKhachDua.setText("");
         txtTienThua.setText("");
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1105,21 +1108,19 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
     }//GEN-LAST:event_txt_tenSPKeyPressed
 
     private void txt_tenSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSPKeyReleased
-        
 
-              // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_txt_tenSPKeyReleased
 
     private void txt_tenSPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSPKeyTyped
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_txt_tenSPKeyTyped
 
     private void cb_mauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_mauActionPerformed
         // TODO add your handling code here:
 
-        
 
     }//GEN-LAST:event_cb_mauActionPerformed
 
@@ -1129,11 +1130,13 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
 
     private void tbl_bangSanPham1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bangSanPham1MouseClicked
         int row = tbl_bangSanPham1.getSelectedRow();
-        if(row == -1) return;
-       
+        if (row == -1) {
+            return;
+        }
+
         String ten = tbl_bangSanPham1.getValueAt(row, 0).toString();
         String donGia = tbl_bangSanPham1.getValueAt(row, 1).toString();
-        String soLuong = JOptionPane.showInputDialog(null, "Số lượng");      
+        String soLuong = JOptionPane.showInputDialog(null, "Số lượng");
         HoaDon hoaDon = new HoaDon();
         hoaDon.setId(banHangService.getByIDMaHD(txtMaHoaDon.getText()));
         DoUong doUong = new DoUong();
@@ -1144,18 +1147,16 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
         doUong_HoaDon.setSoLuong(Integer.parseInt(soLuong));
         doUong_HoaDon.setDonGia(Float.parseFloat(donGia));
         Boolean check = banHangService.check(ten);
-        if(check){
+        if (check) {
             JOptionPane.showMessageDialog(this, "Đồ uống đã có ở hóa đơn chi tiết, vui lòng chọn đồ uống khác");
-            return ;
-        }else if(doUong_HoaDonService.add(doUong_HoaDon)){
+            return;
+        } else if (doUong_HoaDonService.add(doUong_HoaDon)) {
             loadDataHoaDonChiTiet(doUong_HoaDonService.timKiemDoUongHoaDon(txtMaHoaDon.getText()));
             getSum();
             getTienTraKhach();
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_tbl_bangSanPham1MouseClicked
 
     private void txt_tenSP1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_tenSP1FocusGained
@@ -1164,11 +1165,11 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
 
     private void txt_tenSP1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSP1KeyPressed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_txt_tenSP1KeyPressed
 
     private void txt_tenSP1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSP1KeyReleased
-        
+
     }//GEN-LAST:event_txt_tenSP1KeyReleased
 
     private void txt_tenSP1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSP1KeyTyped
@@ -1176,8 +1177,10 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
     }//GEN-LAST:event_txt_tenSP1KeyTyped
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
-      int row = tblHoaDon.getSelectedRow();
-        if(row == -1) return ;
+        int row = tblHoaDon.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
         String maHD = tblHoaDon.getValueAt(row, 0).toString();
         loadDataHoaDonChiTiet(doUong_HoaDonService.timKiemDoUongHoaDon(maHD));
         txtMaHoaDon.setText(tblHoaDon.getValueAt(row, 0).toString());
@@ -1187,13 +1190,13 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int row = tbl_gioHang1.getSelectedRow();
-        if(row == -1){
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Chọn đồ uống mà bạn muốn xóa");
-            return ;
+            return;
         }
         String tenDoUong = banHangService.getByIDMaDU(tbl_gioHang1.getValueAt(row, 0).toString());
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa bản ghi này không");
-        if(confirm == JOptionPane.YES_OPTION){
+        if (confirm == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Xóa đồ uống thành công");
             doUong_HoaDonService.delete(tenDoUong);
             loadDataHoaDonChiTiet(doUong_HoaDonService.timKiemDoUongHoaDon(txtMaHoaDon.getText()));
@@ -1204,9 +1207,9 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
 
     private void btnCapNhatSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatSoLuongActionPerformed
         int row = tbl_gioHang1.getSelectedRow();
-        if(row == -1){
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sản phẩm muốn cập nhập số lượng");
-            return ;
+            return;
         }
         String tenDoUong = banHangService.getByIDMaDU(tbl_gioHang1.getValueAt(row, 0).toString());
         String ten = tbl_bangSanPham1.getValueAt(row, 0).toString();
@@ -1218,14 +1221,14 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
         doUong_HoaDon.setDoUong(doUong);
         doUong_HoaDon.setSoLuong(Integer.parseInt(soLuong));
         doUong_HoaDon.setDonGia(Float.parseFloat(donGia));
-        if(Integer.parseInt(soLuong) == 0){
+        if (Integer.parseInt(soLuong) == 0) {
             JOptionPane.showMessageDialog(this, "Cập nhật số lượng thành công");
             doUong_HoaDonService.delete(tenDoUong);
             loadDataHoaDonChiTiet(doUong_HoaDonService.timKiemDoUongHoaDon(txtMaHoaDon.getText()));
             getSum();
             getTienTraKhach();
         }
-        if(doUong_HoaDonService.update(doUong_HoaDon, tenDoUong)){
+        if (doUong_HoaDonService.update(doUong_HoaDon, tenDoUong)) {
             JOptionPane.showMessageDialog(this, "Cập nhật số lượng thành công");
             loadDataHoaDonChiTiet(doUong_HoaDonService.timKiemDoUongHoaDon(txtMaHoaDon.getText()));
             getSum();
@@ -1243,7 +1246,7 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
     }//GEN-LAST:event_txtTienKhachDuaActionPerformed
 
     private void txtTienKhachDuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTienKhachDuaMouseClicked
-        
+
     }//GEN-LAST:event_txtTienKhachDuaMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -1251,14 +1254,12 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
         HoaDon hoaDon = new HoaDon();
         hoaDon.setNgayThanhToan(genNgay());
         hoaDon.setTinhTrang(0);
-        if(hoaDonService.update(hoaDon, txtMaHoaDon.getText())){
+        if (hoaDonService.update(hoaDon, txtMaHoaDon.getText())) {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             loadDataHoaDon(banHangService.getListHoaDon());
             clearForm();
         }
-        
-        
-        
+
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
@@ -1273,12 +1274,12 @@ private DoUong_HoaDonService doUong_HoaDonService = new DoUong_HoaDonServicerIml
         hoaDon.setTinhTrang(1);
         hoaDon.setKhuyenMai(khuyenMai);
         hoaDon.setNhanVien(nhanVien);
-        if(hoaDonService.add(hoaDon)){
+        if (hoaDonService.add(hoaDon)) {
             JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công");
             loadDataHoaDon(banHangService.getListHoaDon());
 
         }
-        
+
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void txtTienKhachDuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKhachDuaCaretUpdate
