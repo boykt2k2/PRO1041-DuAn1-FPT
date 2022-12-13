@@ -1281,7 +1281,6 @@ public class FormBanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm trước khi thanh toán");
             return ;
         }
-        
         if(txtTienThua.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền khách đưa trước khi thanh toán");
             return ;
