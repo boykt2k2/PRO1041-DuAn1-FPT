@@ -16,9 +16,10 @@ import java.util.ArrayList;
  */
 public interface BanHangService {
     public ArrayList<DoUongVM> getList();
+    public ArrayList<DoUongVM> timKiemDoUong(String ten);
     public ArrayList<HoaDon> getListHoaDon();
     public String getByIDMaHD(String ma);
     public String getByIDMaDU(String ma);
     public ArrayList<DoUong_HoaDon> getListHoaDonChiTiet();
-    public Boolean check(String ma);
+    public Boolean check(String ten,String ma);
 }

@@ -46,8 +46,13 @@ private BanHangRepository banHangRepository = new BanHangRepository();
     }
 
     @Override
-    public Boolean check(String ma) {
-        return banHangRepository.check(ma);
+    public Boolean check(String ten,String ma) {
+        return banHangRepository.check(ten,ma);
+    }
+
+    @Override
+    public ArrayList<DoUongVM> timKiemDoUong(String ten) {
+        return banHangRepository.timKiemDoUong(ten);
     }
 
  

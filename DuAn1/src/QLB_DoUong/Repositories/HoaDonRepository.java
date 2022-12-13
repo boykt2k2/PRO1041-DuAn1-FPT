@@ -19,7 +19,7 @@ private DBConnection connection;
     }
 
     public Boolean add(HoaDon hoaDon) {
-        String sql ="insert into HoaDon(MaHoaDon,NgayTao,NgayThanhToan,TinhTrang,IdNhanVien,IdKhuyenMai) values (?,?,?,?,?)";
+        String sql ="insert into HoaDon(MaHoaDon,NgayTao,NgayThanhToan,TinhTrang,IdNhanVien,IdKhuyenMai) values (?,?,?,?,?,?)";
         try (Connection con = connection.getConnection();
                 PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setString(1, hoaDon.getMaHoaDon());
