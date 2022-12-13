@@ -1271,15 +1271,16 @@ public class FormBanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return ;
         }
-        if(trangThai.equals("Đã thanh toán")){
-            JOptionPane.showMessageDialog(this, "Hóa đơn đã được thanh toán, vui lòng chọn hóa đơn khác");
-            return;
-        }
+        
         ArrayList<DoUong_HoaDon> list = doUong_HoaDonService.timKiemDoUongHoaDon(txtMaHoaDon.getText());
         loadDataHoaDonChiTiet(list);
         if(list.isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm trước khi thanh toán");
             return ;
+        }
+        if(trangThai.equals("Đã thanh toán")){
+            JOptionPane.showMessageDialog(this, "Hóa đơn đã được thanh toán, vui lòng chọn hóa đơn khác");
+            return;
         }
         if(txtTienThua.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền khách đưa trước khi thanh toán");

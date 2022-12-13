@@ -7,6 +7,7 @@ package QLB_DoUong.Services.Impl;
 import QLB_DoUong.DomainModels.KhuyenMai;
 import QLB_DoUong.Repositories.KhuyenMaiRepository;
 import QLB_DoUong.Services.KhuyenMaiService;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -40,5 +41,27 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     public Boolean timKiem() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Boolean updateTinhTrang(KhuyenMai khuyenMai, Date ngayKetThuc) {
+        return khuyenMaiRepository.updateTinhTrang(khuyenMai,ngayKetThuc);
+    }
+
+    @Override
+    public Date ngayBatDau() {
+        return khuyenMaiRepository.ngayBatDau();
+    }
+
+    @Override
+    public Date ngayKetThuc() {
+        return khuyenMaiRepository.ngayKetThuc();
+    }
+
+    @Override
+    public Date locNgayKhuyenMai(Date ngayBatDau, Date ngay, Date ngayKetThuc) {
+        return khuyenMaiRepository.locNgayKhuyenMai(ngayBatDau,ngay,ngayKetThuc);
+    }
+
+    
     
 }

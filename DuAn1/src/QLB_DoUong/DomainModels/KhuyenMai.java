@@ -4,7 +4,7 @@
  */
 package QLB_DoUong.DomainModels;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -14,21 +14,20 @@ public class KhuyenMai {
 
     private String id;
     private String maKhuyenMai;
-    private String tenKhuyenMai;
     private float PhamTramKhuyenMai;
     private Date ngayBatDau;
     private Date ngayKetThuc;
-
+    private int trangThai;
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String id, String maKhuyenMai, String tenKhuyenMai, float PhamTramKhuyenMai, Date ngayBatDau, Date ngayKetThuc) {
+    public KhuyenMai(String id, String maKhuyenMai, float PhamTramKhuyenMai, Date ngayBatDau, Date ngayKetThuc, int trangThai) {
         this.id = id;
         this.maKhuyenMai = maKhuyenMai;
-        this.tenKhuyenMai = tenKhuyenMai;
         this.PhamTramKhuyenMai = PhamTramKhuyenMai;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
+        this.trangThai = trangThai;
     }
 
     public String getId() {
@@ -45,14 +44,6 @@ public class KhuyenMai {
 
     public void setMaKhuyenMai(String maKhuyenMai) {
         this.maKhuyenMai = maKhuyenMai;
-    }
-
-    public String getTenKhuyenMai() {
-        return tenKhuyenMai;
-    }
-
-    public void setTenKhuyenMai(String tenKhuyenMai) {
-        this.tenKhuyenMai = tenKhuyenMai;
     }
 
     public float getPhamTramKhuyenMai() {
@@ -79,9 +70,31 @@ public class KhuyenMai {
         this.ngayKetThuc = ngayKetThuc;
     }
 
-    @Override
-    public String toString() {
-        return "KhuyenMai{" + "id=" + id + ", maKhuyenMai=" + maKhuyenMai + ", tenKhuyenMai=" + tenKhuyenMai + ", PhamTramKhuyenMai=" + PhamTramKhuyenMai + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + '}';
+    public int getTrangThai() {
+        return trangThai;
     }
 
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "KhuyenMai{" + "id=" + id + ", maKhuyenMai=" + maKhuyenMai + ", PhamTramKhuyenMai=" + PhamTramKhuyenMai + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", trangThai=" + trangThai + '}';
+    }
+
+    public int tinhtrang(){
+        if(ngayBatDau.before(genNgay()) && genNgay().before(ngayKetThuc)) {
+            trangThai = 1;
+        }else {
+            trangThai = 0;
+        }
+     
+        return trangThai;
+    }
+    public Date genNgay() {
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        return date;
+    }
 }
