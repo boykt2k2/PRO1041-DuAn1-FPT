@@ -1137,6 +1137,15 @@ public class FormBanHang extends javax.swing.JPanel {
         String ten = tbl_bangSanPham1.getValueAt(row, 0).toString();
         String donGia = tbl_bangSanPham1.getValueAt(row, 1).toString();
         String soLuong = JOptionPane.showInputDialog(null, "Số lượng");
+        String tinhTrang = tbl_bangSanPham1.getValueAt(row, 2).toString();
+        if(txtMaHoaDon.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
+        }
+        if(tinhTrang.equals("Hết")){
+            JOptionPane.showMessageDialog(this, "Đồ uống đã hết, vui lòng chọn đồ uống khác");
+            return ;
+        }
         HoaDon hoaDon = new HoaDon();
         hoaDon.setId(banHangService.getByIDMaHD(txtMaHoaDon.getText()));
         DoUong doUong = new DoUong();
@@ -1146,7 +1155,7 @@ public class FormBanHang extends javax.swing.JPanel {
         doUong_HoaDon.setDoUong(doUong);
         doUong_HoaDon.setSoLuong(Integer.parseInt(soLuong));
         doUong_HoaDon.setDonGia(Float.parseFloat(donGia));
-        Boolean check = banHangService.check(ten);
+        Boolean check = banHangService.check(ten,txtMaHoaDon.getText());
         if (check) {
             JOptionPane.showMessageDialog(this, "Đồ uống đã có ở hóa đơn chi tiết, vui lòng chọn đồ uống khác");
             return;
@@ -1164,7 +1173,8 @@ public class FormBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_tenSP1FocusGained
 
     private void txt_tenSP1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSP1KeyPressed
-        // TODO add your handling code here:
+        ArrayList<DoUongVM> list = banHangService.timKiemDoUong(txt_tenSP1.getText());
+        loadData(list);
 
     }//GEN-LAST:event_txt_tenSP1KeyPressed
 
@@ -1186,6 +1196,8 @@ public class FormBanHang extends javax.swing.JPanel {
         txtMaHoaDon.setText(tblHoaDon.getValueAt(row, 0).toString());
         txtNgayTao.setText(tblHoaDon.getValueAt(row, 1).toString());
         txtMaNV.setText(tblHoaDon.getValueAt(row, 4).toString());
+        getSum();
+        getTienTraKhach();
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -1242,7 +1254,6 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void txtTienKhachDuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienKhachDuaActionPerformed
         getTienTraKhach();
-
     }//GEN-LAST:event_txtTienKhachDuaActionPerformed
 
     private void txtTienKhachDuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTienKhachDuaMouseClicked
@@ -1250,16 +1261,51 @@ public class FormBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTienKhachDuaMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        ArrayList<DoUong_HoaDon> listDoUong_HoaDon = new ArrayList<>();
+        int row = tblHoaDon.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "Chọn hóa đơn cần thanh toán");
+            return ;
+        }
+        String trangThai = tblHoaDon.getValueAt(row, 3).toString();
+        if(txtMaHoaDon.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return ;
+        }
+        ArrayList<DoUong_HoaDon> list = doUong_HoaDonService.timKiemDoUongHoaDon(txtMaHoaDon.getText());
+        loadDataHoaDonChiTiet(list);
+        if(list.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm trước khi thanh toán");
+            return ;
+        }
+        if(trangThai.equals("Đã thanh toán")){
+            JOptionPane.showMessageDialog(this, "Hóa đơn đã được thanh toán, vui lòng chọn hóa đơn khác");
+            return;
+        }
+        if(txtTienThua.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền khách đưa trước khi thanh toán");
+            return ;
+        }
+        try {
+            Float.parseFloat(txtTienKhachDua.getText());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Tiền khách đưa phải là số");
+            return ;
+        }
+        if(Float.parseFloat(txtTienKhachDua.getText()) < Float.parseFloat(txtTongTien.getText())){
+                JOptionPane.showMessageDialog(this, "Tiền khách đưa phải lớn hơn hoặc bằng tổng tiền");
+                return ;
+            }
         HoaDon hoaDon = new HoaDon();
         hoaDon.setNgayThanhToan(genNgay());
         hoaDon.setTinhTrang(0);
         if (hoaDonService.update(hoaDon, txtMaHoaDon.getText())) {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            JOptionPane.showMessageDialog(this, "Bạn cần trả lại khách" + txtTienThua.getText() +" VNĐ");
             loadDataHoaDon(banHangService.getListHoaDon());
             clearForm();
         }
-
+        
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
@@ -1298,6 +1344,8 @@ public class FormBanHang extends javax.swing.JPanel {
         String idDU = txtMaHoaDon.getText();
         ArrayList<DoUong_HoaDon> listTimKiem = doUong_HoaDonService.timKiemDoUongHoaDon(idDU);
         loadDataHoaDonChiTiet(listTimKiem);
+        getSum();
+        getTienTraKhach();
     }//GEN-LAST:event_txtMaHoaDonKeyPressed
 
     private void txtMaHoaDonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaHoaDonKeyReleased

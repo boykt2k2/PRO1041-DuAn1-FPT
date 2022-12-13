@@ -154,16 +154,17 @@ private DBConnection connection;
         }
     }
 
-    public Boolean check(String ma) {
+    public Boolean check(String ten ,String ma) {
          Boolean trangthai = true;
         String sql = "select DoUong.TenDoUong, DoUong_HoaDon.SoLuong,DoUong_HoaDon.DonGia \n" +
 "from DoUong_HoaDon\n" +
 "join DoUong on DoUong.Id = DoUong_HoaDon.IdDoUong\n" +
 "join HoaDon on HoaDon.Id = DoUong_HoaDon.IdHoaDon\n" +
-"where TenDoUong = ?";
+"where TenDoUong = ? and MaHoaDon = ?";
         try (Connection con = connection.getConnection();
                 PreparedStatement pst = con.prepareStatement(sql)) {
-            pst.setString(1, ma); 
+            pst.setString(1, ten); 
+            pst.setString(2, ma); 
             ResultSet rs = pst.executeQuery();
             trangthai = rs.next();
             
@@ -173,6 +174,37 @@ private DBConnection connection;
         }
         return trangthai;
     
+    }
+
+    public ArrayList<DoUongVM> timKiemDoUong(String ten) {
+        ArrayList<DoUongVM> listDoUong = new ArrayList<>();
+        String sql = "select DoUong.TenDoUong, DoUong.DonGia ,DoUong.TrangThai, Size.TenSize,DanhMuc.TenDanhMuc\n" +
+"from DoUong\n" +
+"join Size on Size.Id = DoUong.IdSize\n" +
+"join DanhMuc on DanhMuc.Id = DoUong.IdDanhMuc\n" +
+"where TenDoUong like N'%"+ten+"%'";
+        try (Connection con = connection.getConnection();
+                PreparedStatement pst = con.prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                DoUongVM doUong = new DoUongVM();
+                doUong.setTenDoUong(rs.getString(1));
+                doUong.setDonGia(rs.getBigDecimal(2));
+                doUong.setTrangThai(rs.getInt(3));
+                Size size = new Size();
+                size.setTenSize(rs.getString(4));
+                DanhMuc danhMuc = new DanhMuc();
+                danhMuc.setTenDanhMuc(rs.getString(5));
+                doUong.setSize(size);
+                doUong.setDanhMuc(danhMuc);
+                listDoUong.add(doUong);
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return listDoUong;
     }
     
     
