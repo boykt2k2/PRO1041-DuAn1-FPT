@@ -17,7 +17,7 @@ public interface NhanVienService {
 
     String add(NhanVien nhanVien);
 
-    String update(NhanVien nhanVien, String maNV);
+    String update(NhanVien nhanVien, String Id);
 
     String delete(String maNV);
 
@@ -26,5 +26,7 @@ public interface NhanVienService {
     List<NhanVien> searchDiaChi(String diaChi);
 
     List<NhanVien> searchGioiTinh(String gioiTinh);
+
+    String checkTrung(String maNV);
 
 }

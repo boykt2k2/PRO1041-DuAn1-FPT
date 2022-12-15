@@ -23,6 +23,7 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
     public ViewGiaoDienBanHang() {
         initComponents();
         setLocationRelativeTo(null);
+        btnBanHang.setBackground(new Color(165, 245, 157));
         setpanal(new FormBanHang());
     }
 
