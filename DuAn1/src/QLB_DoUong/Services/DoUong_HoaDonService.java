@@ -17,4 +17,5 @@ public interface DoUong_HoaDonService {
     public Boolean add(DoUong_HoaDon doUong_HoaDon);
     public Boolean update(DoUong_HoaDon doUong_HoaDon,String ma);
     public Boolean delete(String ma);
+    public Boolean deleteTable(String ma);
 }

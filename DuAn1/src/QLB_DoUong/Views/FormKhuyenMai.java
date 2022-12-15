@@ -24,7 +24,7 @@ public KhuyenMaiService khuyenMaiService = new KhuyenMaiServiceImpl();
     public FormKhuyenMai() {
         initComponents();
               loadData(khuyenMaiService.getList());
-              tinhTrang();
+              
     }
        
     public void loadData( ArrayList<KhuyenMai> list){
@@ -46,12 +46,7 @@ public KhuyenMaiService khuyenMaiService = new KhuyenMaiServiceImpl();
     
         
     }
-    private void tinhTrang(){
-        Date ngayBatDau = khuyenMaiService.ngayBatDau() ;
-        Date ngayKetThuc = khuyenMaiService.ngayKetThuc();
-        Date ngay = genNgay();
-            
-        }
+    
             
         
         

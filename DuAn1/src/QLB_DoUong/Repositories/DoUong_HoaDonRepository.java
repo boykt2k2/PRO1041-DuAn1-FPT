@@ -122,5 +122,20 @@ private DBConnection connection;
         }
         return listDoUongHoaDon;
     }
+
+    public Boolean deleteTable(String ma) {
+        String sql = "delete from DoUong_HoaDon where IdHoaDon = ?";
+        try (Connection con = connection.getConnection();
+                PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, ma);
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return false;
+        }
+        
+        return true;
+    }
     
 }

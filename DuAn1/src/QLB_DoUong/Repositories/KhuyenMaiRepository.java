@@ -125,21 +125,5 @@ public class KhuyenMaiRepository {
         return null;
     }
 
-    public Date locNgayKhuyenMai(Date ngayBatDau, Date ngay, Date ngayKetThuc) {
-        String sql = "select NgayBatDau, NgayKetThuc from  KhuyenMai where NgayBatDau <= ? and NgayKetThuc >= ?";
-        try (Connection con = Connection.getConnection();
-                PreparedStatement pst = con.prepareStatement(sql)) {
-            pst.setDate(1, ngay);
-           
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }

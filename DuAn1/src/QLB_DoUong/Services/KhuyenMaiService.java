@@ -21,6 +21,5 @@ public interface KhuyenMaiService {
     public boolean delete(String id);
     public Date ngayBatDau();
     public Date ngayKetThuc();
-    public Date locNgayKhuyenMai(Date ngayBatDau,Date ngay,Date ngayKetThuc);
     public Boolean timKiem();
 }

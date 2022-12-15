@@ -43,5 +43,10 @@ private DoUong_HoaDonRepository doUong_HoaDonRepository = new DoUong_HoaDonRepos
     public ArrayList<DoUong_HoaDon> getListDoUongHoaDon() {
         return doUong_HoaDonRepository.getListDoUongHoaDon();
     }
+
+    @Override
+    public Boolean deleteTable(String ma) {
+        return doUong_HoaDonRepository.deleteTable(ma);
+    }
     
 }

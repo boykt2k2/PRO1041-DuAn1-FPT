@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public interface HoaDonService {
     public ArrayList<HoaDon> getList();
     public Boolean add(HoaDon hoaDon);
+    
     public Boolean update(HoaDon hoaDon, String ma);
    
     public ArrayList<HoaDon> timKiem(String ma);

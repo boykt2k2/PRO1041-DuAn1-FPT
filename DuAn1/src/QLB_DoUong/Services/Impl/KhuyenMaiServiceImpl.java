@@ -57,10 +57,7 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
         return khuyenMaiRepository.ngayKetThuc();
     }
 
-    @Override
-    public Date locNgayKhuyenMai(Date ngayBatDau, Date ngay, Date ngayKetThuc) {
-        return khuyenMaiRepository.locNgayKhuyenMai(ngayBatDau,ngay,ngayKetThuc);
-    }
+    
 
     
     
