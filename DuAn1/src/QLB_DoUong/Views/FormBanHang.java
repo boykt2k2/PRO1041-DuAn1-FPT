@@ -1216,7 +1216,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private void txt_tenSP1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSP1KeyPressed
         ArrayList<DoUongVM> list = banHangService.timKiemDoUong(txt_tenSP1.getText());
         loadData(list);
-
+        
     }//GEN-LAST:event_txt_tenSP1KeyPressed
 
     private void txt_tenSP1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tenSP1KeyReleased
