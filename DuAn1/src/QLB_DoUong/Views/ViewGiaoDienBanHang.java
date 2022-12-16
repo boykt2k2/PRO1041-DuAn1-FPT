@@ -54,6 +54,7 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
         btnDanhMuc = new javax.swing.JButton();
         btnSize = new javax.swing.JButton();
         btnBanHang = new javax.swing.JButton();
+        btnHoaDon = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -161,6 +162,15 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
             }
         });
 
+        btnHoaDon.setBackground(new java.awt.Color(228, 245, 194));
+        btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnHoaDon.setText("Hóa Đơn");
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpanelLayout = new javax.swing.GroupLayout(jpanel);
         jpanel.setLayout(jpanelLayout);
         jpanelLayout.setHorizontalGroup(
@@ -175,7 +185,8 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
                     .addComponent(btnDoUong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                     .addComponent(btnDanhMuc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 23, Short.MAX_VALUE))
         );
         jpanelLayout.setVerticalGroup(
@@ -189,7 +200,9 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
                 .addComponent(btnDoUong, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(18, 18, 18)
+                .addComponent(btnHoaDon)
+                .addGap(27, 27, 27)
                 .addComponent(btnBan, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,6 +214,8 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
+
+        jpanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHoaDon, btnKhuyenMai});
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -402,6 +417,20 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
         setpanal(new FormBanHang());
     }//GEN-LAST:event_btnBanHangActionPerformed
 
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        btnHoaDon.setBackground(new Color(165, 245, 157));
+        btnDoUong.setBackground(new Color(228, 245, 194));
+        btnKhuyenMai.setBackground(new Color(228, 245, 194));
+        btnBan.setBackground(new Color(228, 245, 194));
+        btnNhanVien.setBackground(new Color(228, 245, 194));
+        btnThongKe.setBackground(new Color(228, 245, 194));
+        btnDangXuat.setBackground(new Color(228, 245, 194));
+        btnSize.setBackground(new Color(228, 245, 194));
+        btnDanhMuc.setBackground(new Color(228, 245, 194));
+        btnKhuyenMai.setBackground(new Color(228, 245, 194));
+        setpanal(new FormQuanLyHoaDon());
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,6 +473,7 @@ public class ViewGiaoDienBanHang extends javax.swing.JFrame {
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnDanhMuc;
     private javax.swing.JButton btnDoUong;
+    private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnKhuyenMai;
     private javax.swing.JButton btnNhanVien;
     private javax.swing.JButton btnSize;
